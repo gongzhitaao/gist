@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="charset" content="utf-8" />
+    <title>gist.gongzhitaao</title>
+    <link rel="stylesheet"
+          href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
+
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+    <h1>My Gist</h1>
+
+<div class="gists">
+</div>
+
+<script>
+
+  $(document).ready(function() {
+      var gistapi = 'https://api.github.com';
+      // var viewurl = 'https://gist.gongzhitaao.org/gist/?';
+      var viewurl = 'http://gist.gongzhitaao.org/gist/?';
+      var username = 'gongzhitaao';
+
+      // load all my gists
+      $.ajax({
+          type: 'GET',
+          url: gistapi + '/users/' + username + '/gists',
+          dataType: 'json',
+          success: function(data, status, xhr) {
+              gists = $('.gists').html('');
+              count = data.length;
+              for (var i = 0; i < count; ++i) {
+                  // if there is a `README.md', I assume that you want
+                  // to list this gist.
+                  if ('README.md' in data[i].files) {
+                      $('<a/>', {
+                          'class': 'gist',
+                          href: viewurl + $.param({id: data[i].url.substr(data[i].url.lastIndexOf('/') + 1)}),
+                          text: data[i].description
+                      }).appendTo(gists);
+                  }
+              }
+          }
+      });
+  });
+
+</script>
+
+  </body>
+</html>
