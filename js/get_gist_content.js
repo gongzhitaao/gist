@@ -11,9 +11,6 @@
       url: GistAPI + '/gists/' + id,
       dataType: 'jsonp',
       success: function (gist) {
-
-        console.log(gist);
-
         // username and url
         $('.user')
           .attr('href', Home + '/?user=' + gist.data.owner.login)
