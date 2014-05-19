@@ -40,7 +40,7 @@
                       .addClass('description')
                       .text(data[i].description))
               .css('background', 'url(' + GistRaw +
-                   username + '/' + data[i].id + '/raw/thumbnail.png'+ ') no-repeat center center')
+                   username + '/' + data[i].id + '/raw/thumbnail.png'+ ') no-repeat center left')
               .appendTo($gist);
           }
         }
@@ -48,13 +48,13 @@
     });
 
     // Show more as scrolling down.
-    $(window).scroll(function() {
+    // $(window).scroll(function() {
 
-      if ($(window).scrollTop() ==
-          $(document).height() - $(window).height()) {
-        console.log("helo");
-      }
-    });
+    //   if ($(window).scrollTop() ==
+    //       $(document).height() - $(window).height()) {
+    //     console.log("helo");
+    //   }
+    // });
   });
 
 })(jQuery);
