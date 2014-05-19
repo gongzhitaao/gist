@@ -1,98 +1,64 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta name="charset" content="utf-8" />
-    <title>Gist gongzhitaao</title>
-    <link rel="stylesheet"
-          href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
+    <title>Enjoy my gist</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
 
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+      pre code {
+          font-size: 16px;
+      }
+      .gistid:before {
+          content: "#";
+      }
+      .gist-date {
+          float: right;
+      }
+      .gist-description {
+          width: 960px;
+      }
+      .gist-date {
+          font-size: 14px;
+          color: #848482;
+      }
+      .gist-source {
+          overflow: auto;
+      }
+      iframe {
+          border: 1px solid #DEDEDE;
+          width: 960px;
+          height: 500px;
+      }
+      .toggle-source {
+          cursor: pointer;
+          float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <a class="user"><i class="fa fa-github-alt"></i>&nbsp;</a> / <a class="gistid"></a>
+      <span class="gist-date"></span>
+    </div>
+    <h1 class="gist-description">
+      <i class="fa fa-code pull-right toggle-source"
+         title="Toggle source"></i>
+    </h1>
+    <iframe class="gist-demo" marginheight="0" marginwidth="0" scrolling="no">
+    </iframe>
+    <div class="gist-readme"></div>
+    <div class="gist-sources"></div>
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
     <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-
     <script type="text/javascript">
       hljs.initHighlightingOnLoad();
     </script>
-  </head>
-  <body>
-    <iframe id="gist-demo" style="width: 960px; height: 500px;">
-</iframe>
-
-<div class="gist-readme">
-</div>
-
-<div class="gist-source">
-</div>
-
-<script>
-
-function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam)
-            return sParameterName[1];
-    }
-}
-
-// Accepts a url and a callback function to run.
-function requestCrossDomain(url, cb) {
-
-    yql = "http://query.yahooapis.com/v1/public/yql?" +
-        "q=" +
-        encodeURIComponent('select * from html where url="' + url + '" ') +
-        encodeURIComponent('and compat="html5" and xpath="//html/head|//html/body"') +
-        "&format=xml&callback=?";
-
-    $.getJSON(yql, function (data) {
-        if(data.results)
-            cb(data.results);
-    });
-}
-
-function removeCDATA(s) {
-    return s.replace(/<!\[CDATA\[/gi, "").replace(/\]\]>/gi, "");
-}
-
-$(document).ready(function() {
-    var gistapi = 'https://api.github.com';
-    var id = getUrlParameter('id');
-
-    $.ajax({
-        type: 'GET',
-        url: gistapi + '/gists/' + id,
-        dataType: 'json',
-        success: function(data, status, xhr) {
-            requestCrossDomain(data.files['index.html'].raw_url, function(data) {
-                var html = '';
-                var cnt = data.length;
-                for (var i = 0; i < cnt; ++i)
-                    html += removeCDATA(data[i]);
-
-                // fill in the gist-demo
-                iframe =  document.getElementById('gist-demo');
-                var doc = iframe.contentWindow || iframe.contentDocument;
-                if (doc.document)
-                    doc = doc.document;
-                doc.open();
-                doc.write(html);
-                doc.close();
-
-                // fill in the gist-source
-                var code = $('<code>').append($('<div/>').text(html).html());
-                var pre = $('<pre>').html(code);
-                $('.gist-source').html(pre);
-                pre.each(function(i, e) {hljs.highlightBlock(e);});
-            });
-
-            requestCrossDomain(data.files['README.md'].raw_url, function(data) {
-
-            });
-        }});
-});
-
-</script>
-
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/get_gist_content.js"></script>
   </body>
 </html>

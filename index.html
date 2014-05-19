@@ -1,57 +1,36 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta name="charset" content="utf-8" />
-    <title>gist.gongzhitaao</title>
-    <link rel="stylesheet"
-          href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
-
-    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-
-    <script type="text/javascript">
-      hljs.initHighlightingOnLoad();
-    </script>
+    <title>Enjoy my work</title>
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+      a.gist {
+          display: inline-block;
+          width: 230px;
+          height: 80px;
+          margin: 0 10px;
+          text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+          float: left;
+          position: relative;
+      }
+      a .description {
+          position: absolute;
+          padding: 20px 5px;
+          vertical-align: middle;
+      }
+      h1 {
+          font-size: 48px;
+          font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <h1>My Gist</h1>
-
-<div class="gists">
-</div>
-
-<script>
-
-  $(document).ready(function() {
-      var gistapi = 'https://api.github.com';
-      // var viewurl = 'https://gist.gongzhitaao.org/gist/?';
-      var viewurl = 'http://gist.gongzhitaao.org/gist/?';
-      var username = 'gongzhitaao';
-
-      // load all my gists
-      $.ajax({
-          type: 'GET',
-          url: gistapi + '/users/' + username + '/gists',
-          dataType: 'json',
-          success: function(data, status, xhr) {
-              gists = $('.gists').html('');
-              count = data.length;
-              for (var i = 0; i < count; ++i) {
-                  // if there is a `README.md', I assume that you want
-                  // to list this gist.
-                  if ('README.md' in data[i].files) {
-                      $('<a/>', {
-                          'class': 'gist',
-                          href: viewurl + $.param({id: data[i].url.substr(data[i].url.lastIndexOf('/') + 1)}),
-                          text: data[i].description
-                      }).appendTo(gists);
-                  }
-              }
-          }
-      });
-  });
-
-</script>
-
+    <h1><a class="user"><i class="fa fa-github-alt">&nbsp;</i></a></h1>
+    <div class="gists"></div>
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/get_gist_list.js"></script>
   </body>
 </html>
