@@ -24,7 +24,7 @@ function UrlParam(sSearch) {
   }
 };
 
-var Home = 'https://gist.gongzhitaao.org';
+var Home = 'http://gist.gongzhitaao.org';
 // var Home = 'http://0.0.0.0:4000';
 var GistAPI = 'https://api.github.com';
 var GistRaw = 'https://gist.githubusercontent.com/';
