@@ -6,14 +6,18 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <style>
+      .gists {
+          overflow-y: auto;
+      }
       a.gist {
           display: inline-block;
           width: 230px;
           height: 80px;
-          margin: 5px;
+          margin: 3px;
           text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
           float: left;
           position: relative;
+          border: 1px solid #eee;
       }
       a .description {
           position: absolute;
@@ -24,11 +28,25 @@
           font-size: 48px;
           font-weight: bold;
       }
+      .refresher {
+          cursor: pointer;
+          margin: 2em 0;
+          width: 100%;
+          text-align: center;
+      }
     </style>
   </head>
   <body>
+
+    <a href="https://github.com/gongzhitaao/gist">
+      <img style="position: absolute; top: 0; right: 0; border: 0;"
+           src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
+           alt="Fork me on GitHub"
+           data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
     <h1><a class="user"><i class="fa fa-github-alt">&nbsp;</i></a></h1>
     <div class="gists"></div>
+    <div><i class="fa fa-refresh refresher"></i></div>
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/get_gist_list.js"></script>
